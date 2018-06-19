@@ -1,0 +1,35 @@
+<div class = "wrapper">
+  <div class="panel panel-default" *ngFor="let bus of busList; let i = index;">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{ bus.name }}</h3>
+    </div>
+    <div class="panel-body">
+      <label>Route: {{bus.route.from }} ===> {{ bus.route.to }} @ {{ bus.route.date }}</label><br />
+      <label> Available: {{ bus.noOfSeats - bus.filledSeat.length }}</label><label class="pull-right">Price: {{ bus.farePerSeat }}</label>
+      <div class="panel-collapse" [class.collapse]='current != i || current == -1' >
+        <div class="well">
+          <div class="seat" *ngFor="let seat of busSeats; let c = index" (click)="selectSeat(c)">
+            <span class="glyphicon" aria-hidden="true"
+            [style.color]="seat.userId != -1 && seat.userId != -2 ? 'gray': 'black'"
+            [class.glyphicon-check] = "seat.userId != -1" 
+            [class.glyphicon-unchecked] = "seat.userId == -1" ></span>
+          </div>
+        </div>
+        <button class="btn btn-primary" (click)="bookTicket(bus)">Book Ticket</button>
+        <div class="well" *ngIf="bookedSeat.length">
+          <div class="seat" *ngFor="let seat of bookedSeat; let c = index" (click)="selectCancelSeat(seat.id, c)">
+            <span class="glyphicon" aria-hidden="true"  
+            [class.glyphicon-check] = "seat.userId != -1" 
+            [class.glyphicon-unchecked] = "seat.userId == -1" ></span>
+          </div>
+        </div>
+        <button *ngIf="bookedSeat.length" class="btn btn-primary" (click)="cancelTicket(bus, i)">Cancel Ticket</button>  
+      </div>
+    </div>
+    <div class="panel-footer text-center" (click)="showBusSeats(bus, i)">
+        <span class="glyphicon" aria-hidden="true"
+        [class.glyphicon-triangle-top] = "i == current"
+        [class.glyphicon-triangle-bottom] = "i != current || current == -1" ></span>
+    </div>
+  </div>
+</div>

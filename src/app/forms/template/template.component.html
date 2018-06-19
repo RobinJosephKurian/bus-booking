@@ -1,0 +1,10 @@
+<div class="wrapper">
+  <form #eventForm="ngForm" class="form-signin" (ngSubmit)="saveData(eventForm.value)">       
+    <h2 class="form-signin-heading">Template Forms</h2>
+    <input type="text" class="form-control" name="name" (ngModel)="name" placeholder="Name"  required/>
+    <em style="color: red" *ngIf="eventForm.controls.name?.invalid && eventForm.controls.name?.touched">Name required</em>
+    <input type="email" class="form-control" name="email" (ngModel)="email" placeholder="Email" email required/> 
+    <em style="color: red" *ngIf="eventForm.controls.email?.invalid && eventForm.controls.email?.touched">Email required</em>
+    <button [disabled]="eventForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+  </form>
+</div>

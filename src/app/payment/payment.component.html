@@ -1,0 +1,57 @@
+<div class="wrapper">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Book Ticket</h3>
+      </div>
+      <div class="panel-body">
+        <label>Bus Name: {{ bus.name }}</label><br />
+        <label>Route: {{bus.route.from }} ===> {{ bus.route.to }} @ {{ bus.route.date }}</label><br />
+        <label> Available: {{ bus.noOfSeats - bus.filledSeat.length }}</label><label class="pull-right">Price: {{ bus.farePerSeat }}</label>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Ticket Amount</label>
+          </div>
+          <div class="col-md-6 text-right">
+            <label> {{ payableAmount | currency : 'INR' }} </label>    
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>GST ({{ gst }} %)</label>
+          </div>
+          <div class="col-md-6 text-right">
+            <label> {{ (payableAmount | gstPipe : gst) | currency : 'INR'}} </label>    
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Payable Amount</label>
+          </div>
+          <div class="col-md-6 text-right">
+            <label> {{ (payableAmount + (payableAmount | gstPipe : gst)) | currency: 'INR'}} </label>    
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <select class="form-control" [(ngModel)]="paymentMode">
+              <option selected="" [value]="1">Internet Banking</option>
+              <option [value]="2">Credit Card</option>
+              <option [value]="3">COD</option>
+            </select>
+          </div>
+        </div>
+        <div [ngSwitch]="paymentMode">
+          <div *ngSwitchCase="1">
+              <app-internet-banking [payableAmountChild]="payableAmount + (payableAmount | gstPipe : gst)" (paymentSuccess)= "bookTicket($event)"></app-internet-banking>
+          </div>
+          <div *ngSwitchCase="2">
+             <app-credit-card [payableAmount]="payableAmount + (payableAmount | gstPipe : gst)" (paymentSuccess)= "bookTicket($event)"></app-credit-card>
+          </div>
+          <div *ngSwitchDefault>
+              <app-cod [payableAmount]="payableAmount + (payableAmount | gstPipe : gst)" (paymentSuccess)= "bookTicket($event)"></app-cod>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

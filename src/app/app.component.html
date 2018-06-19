@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" routerLink="search-bus">Bus Booking</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a routerLink="observable"> Observable </a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Http
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a routerLink="get">Get</a>
+                    </li>
+                    <li>
+                        <a routerLink="post">Post</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forms
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a routerLink="template">Template</a>
+                    </li>
+                    <li>
+                        <a routerLink="reactive">Reactive</a>
+                    </li>
+                </ul>
+            </li>
+            <li *ngIf="!user">
+                <a (click)="loginUser()">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a>
+            </li>
+            <li *ngIf="user">
+                <a (click)="logoutUser()">
+                    <span class="glyphicon glyphicon-log-out"></span> Logout {{ user.name }} </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="true" [direction]="'leftToRightIncreased'"
+    [color]="'white'" [trickleSpeed]="250" [thick]="true" [ease]="'linear'"></ng-progress>
+
+<router-outlet></router-outlet>
+
+<app-alert></app-alert>

@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <form class="">       
+    <h2 class="">Search Bus</h2>
+    <input type="text" class="form-control" name="from" [(ngModel)]="from" placeholder="From" autofocus="" />
+    <input type="text" class="form-control" name="to" [(ngModel)]="to" placeholder="To" />
+    <input type="date" class="form-control" name="date" [(ngModel)]="date" placeholder="Date" />
+    <button class="btn btn-lg btn-primary btn-block" type="button" (click)="searchBus()">Search</button>   
+  </form>
+</div>

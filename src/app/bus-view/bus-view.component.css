@@ -1,0 +1,12 @@
+.wrapper {
+    width: 70%;
+    margin: auto;
+}
+
+.well {
+    display: flex;
+}
+.seat {
+    font-size: x-large;
+    padding: 0 12px;
+}

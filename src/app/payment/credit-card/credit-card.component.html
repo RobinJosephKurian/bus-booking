@@ -1,0 +1,9 @@
+<div class="well">
+  <label>Payable amount: {{payableAmount | currency : 'INR'}}</label>
+  <hr>
+  <label>Card number: </label>
+  <input class="form-control" type="text" placeholder="card number" />
+  <label>cvv number: </label>
+  <input class="form-control" type="text" placeholder="cvv number">
+  <button class="btn btn-lg btn-primary btn-block" type="button" (click)="payAmount()">Pay Amount</button>
+</div>

@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <form [formGroup]="reactForms" class="form-signin" (ngSubmit)="saveData(reactForms.value)">       
+    <h2 class="form-signin-heading">Reactive Forms</h2>
+    <input type="text" class="form-control" formControlName="name" name="name" placeholder="Name"/>
+    <em style="color: red" *ngIf="reactForms.get('name').hasError('required') && name?.touched">Name required</em>
+    <input type="email" class="form-control" formControlName="email" name="email" placeholder="Email"/> 
+    <em style="color: red" *ngIf="reactForms.get('email').hasError('required') && email?.touched">Email required</em>
+    <em style="color: red" *ngIf="reactForms.get('email').hasError('email') && email?.touched">Invalid email</em>
+    <em style="color: red" *ngIf="reactForms.get('email').hasError('validUrl') && email?.touched">Should start with www</em>
+    <button [disabled]="reactForms.invalid" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+  </form>
+</div>
